@@ -7,7 +7,7 @@ Class {
 
 { #category : 'baselines' }
 BaselineOfMygChess >> baseline: spec [
-"test"
+
 	<baseline>
 	spec
 		baseline: 'Bloc'
