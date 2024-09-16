@@ -11,23 +11,43 @@ Class {
 { #category : 'running' }
 MyPawnTest >> setUp [
 	super setUp.
-	"Put here a common initialization logic for tests"
 ]
 
 { #category : 'tests' }
-MyPawnTest >> testFirstMove [
-	| pawn squares board |
-	
+MyPawnTest >> testFirstMoveOnSecond [
+
+	| pawn board squareE4 |
 	"Context"
-	board := MyChessBoard empty.
+	"board := MyChessBoard empty ."
+	board := MyChessBoard empty .
 	board at: 'e2' put: (pawn := MyPawn white).
 	
 	"Stimuli"
-	 pawn renderPieceOn: (board at: 'e4').
+	squareE4 := board at: 'e4'.
+	board game move: pawn to: squareE4.
+
+	"Check"
+	self assert: squareE4 hasPiece equals: true.
+	self assert: squareE4 piece equals: pawn
+]
+
+{ #category : 'tests' }
+MyPawnTest >> testFirstMoveOnSecondSquare [
+	| pawn board squareE4 |
 	
-	""
+	"Context"
+	board := MyChessBoard empty game:MyChessGame freshGame.
+	pawn := board at: 'e2' contents.
+	
 	
 	"Stimuli"
+	squareE4 := board at: 'e4'.
+	board game move: pawn to: squareE4.
+	
+	"Check"
+	self assert: squareE4 hasPiece equals: true.
+	self assert: squareE4 piece equals: pawn.
+	
 	
 ]
 
