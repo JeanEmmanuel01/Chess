@@ -44,6 +44,16 @@ MyPawn >> moveTo: aSquare [
 	
 ]
 
+{ #category : 'as yet unclassified' }
+MyPawn >> possibleMovesStraightAhead [
+	"return an array of squares"
+		
+	^(isFirstStep ifTrue: 
+							[self isWhite ifTrue: [{square up}] ifFalse: [{square down}]] 
+					ifFalse: 
+							[self isWhite ifTrue: [{square up . square up}] ifFalse: [{square down . square down}]]).
+]
+
 { #category : 'rendering' }
 MyPawn >> renderPieceOn: aSquare [ 
 	
@@ -52,13 +62,9 @@ MyPawn >> renderPieceOn: aSquare [
 
 { #category : 'rendering' }
 MyPawn >> targetSquaresLegal: aBoolean [
-	|  possibleMoves   |
-	 
-	possibleMoves := (self isWhite
-		   ifTrue: 
-				[self isFirstStep ifTrue: [ {square up . square up up}] ifFalse: [{square up}] ]
-		   ifFalse: 
-				[self isFirstStep ifTrue: [ {square down . square down down}] ifFalse: [{square down}]]) 
+	|  possibleMoves |
+	
+	possibleMoves := ( self possibleMovesStraightAhead ) 
 			select: [ :s |
 		  		s notNil and: [
 			  			s hasPiece not or: [ s contents color ~= color ] ] ].
