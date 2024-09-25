@@ -1,9 +1,6 @@
 Class {
 	#name : 'MyPawn',
 	#superclass : 'MyPiece',
-	#instVars : [
-		'isFirstStep'
-	],
 	#category : 'Myg-Chess-Core',
 	#package : 'Myg-Chess-Core'
 }
@@ -19,20 +16,14 @@ MyPawn >> initialize [
 
 	super initialize.
 	
-	isFirstStep := true.
-	
 	
 ]
 
 { #category : 'accessing' }
 MyPawn >> isFirstStep [
-	
-	^isFirstStep 
-]
-
-{ #category : 'accessing' }
-MyPawn >> isFirstStep: aBoolean [
-   isFirstStep := aBoolean.
+    ^(self isWhite 
+        ifTrue: [ (square name findString: '2' ) > 0 ] 
+        ifFalse: [ (square name findString: '7' ) > 0 ]).
 
 ]
 
@@ -61,7 +52,7 @@ MyPawn >> possibleDiagonalMove [
 MyPawn >> possibleStraightAheadMoves [
 	"return an array of squares"
 		
-	^(isFirstStep ifTrue: 
+	^(self isFirstStep ifTrue: 
 							[self isWhite ifTrue: [{square up . square up up}] ifFalse: [{square down . square down down}]] 
 					ifFalse: 
 							[self isWhite ifTrue: [{square up}] ifFalse: [{square down}]]).
