@@ -64,7 +64,9 @@ MyPawn >> possibleStraightAheadMoves [
 	^(self isFirstStep ifTrue: 
 							[self isWhite ifTrue: [{square up . square up up}] ifFalse: [{square down . square down down}]] 
 					ifFalse: 
-							[self isWhite ifTrue: [{square up}] ifFalse: [{square down}]]).
+							[self isWhite ifTrue: [{square up}] ifFalse: [{square down}]]) 
+		 select: [ :s |
+		  		s notNil and: [ s hasPiece not ] ].
 ]
 
 { #category : 'rendering' }
@@ -77,10 +79,7 @@ MyPawn >> renderPieceOn: aSquare [
 MyPawn >> targetSquaresLegal: aBoolean [
 	|  possibleMoves |
 	
-	possibleMoves := ( self possibleStraightAheadMoves, self possibleDiagonalMove ) 
-			select: [ :s |
-		  		s notNil and: [
-			  			s hasPiece not or: [ s contents color ~= color ] ] ].
+	possibleMoves := ( self possibleStraightAheadMoves, self possibleDiagonalMove ).
 	
 	^possibleMoves .
 ]
