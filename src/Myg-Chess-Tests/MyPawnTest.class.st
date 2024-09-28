@@ -21,6 +21,55 @@ MyPawnTest >> setUp [
 ]
 
 { #category : 'tests' }
+MyPawnTest >> testCannotExceedPawnStraightAhead [
+
+	| board whitePawn blackPawn|
+	
+	"Context"
+	board := MyChessGame freshGame board .
+													
+	whitePawn := (board at: 'b2') contents. 
+	blackPawn := (board at: 'b7') contents. 
+	
+	"Stimuli"
+		board game move: whitePawn to: (whitePawn square up up).
+		board game move: blackPawn to: (blackPawn square down down).
+				
+	"Check"
+	self assert: whitePawn targetSquares isEmpty.
+	self assert: blackPawn targetSquares isEmpty.	
+]
+
+{ #category : 'tests' }
+MyPawnTest >> testCannotExceedTheGrid [
+
+	| board whitePawn blackPawn|
+	
+	"Context"
+	board := MyChessGame freshGame board .
+													
+	whitePawn := (board at: 'b2') contents. 
+	blackPawn := (board at: 'h7') contents. 
+	
+	"Stimuli : we move to limit of Grid"
+		"White pawn"
+		(1 to: 4 do: 
+					[:i | board game move: whitePawn to: (whitePawn square up) ]).
+		board game move: whitePawn to: (whitePawn square up left).
+		board game move: whitePawn to: (whitePawn square up right).
+		
+		"Black pawn"
+		(1 to: 4 do: 
+					[:i | board game move: blackPawn to: (blackPawn square down) ]).
+		board game move: blackPawn to: (blackPawn square down left).
+		board game move: blackPawn to: (blackPawn square down right).
+				
+	"Check"
+	self assert: whitePawn targetSquares isEmpty.
+	self assert: blackPawn targetSquares isEmpty.	
+]
+
+{ #category : 'tests' }
 MyPawnTest >> testDiagonalMoveIfCanCapture [
 
 	| board pawnWhite pawnBlack targetSquare|
@@ -45,13 +94,17 @@ MyPawnTest >> testDiagonalMoveIfCanCapture [
 MyPawnTest >> testDiagonalPossibleMoveIfCanCapture [
 
 	| board pawnWhite pawnBlack blackSquares whiteSquares |
-	"Context""Stimuli""Possible moves Tests""Check"
+	"Context""Possible moves Tests""Check"
+	
 	board := MyChessGame freshGame board.
 	pawnWhite := (board at: 'd2') contents.
 	pawnBlack := (board at: 'e7') contents.
+	
+	"Stimuli"
 	self setDiagonalSituation: pawnWhite a: pawnBlack b: board.
 	whiteSquares := pawnWhite targetSquares.
 	blackSquares := pawnBlack targetSquares.
+	
 	self
 		assertCollection: whiteSquares , blackSquares
 		includesAll:

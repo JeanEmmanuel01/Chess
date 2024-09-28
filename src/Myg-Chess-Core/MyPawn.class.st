@@ -31,17 +31,26 @@ MyPawn >> isFirstStep [
 MyPawn >> moveTo: aSquare [
 
 	super moveTo: aSquare.
-	self isFirstStep ifTrue: [ self isFirstStep: false ].
 	
 ]
 
 { #category : 'as yet unclassified' }
 MyPawn >> possibleDiagonalMove [
 	"return an array of squares"
-	| squareLeft squareRight |
+	| squareLeft squareRight squareUp squareDown|
 	
-	squareLeft := self isWhite ifTrue: [square up left] ifFalse: [square down right].
-	squareRight := self isWhite ifTrue: [square up right] ifFalse: [square down left].
+	squareUp := square up.
+	squareDown := square down.
+	
+	squareLeft := self isWhite ifTrue: 
+											[squareUp ifNotNil: [squareUp left]] 
+										ifFalse: 
+											[squareDown ifNotNil: [squareDown right] ].
+	
+	squareRight := self isWhite ifTrue: 
+											[squareUp ifNotNil: [squareUp right]] 
+										ifFalse: 
+											[squareDown ifNotNil: [squareDown left] ].
 	
 	^( 
 		(Array with: squareLeft with:squareRight) 
