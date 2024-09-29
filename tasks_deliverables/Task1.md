@@ -16,32 +16,48 @@ L'objectif de ce kata est de réaliser les déplacements des pions (Pawns) du je
 
 ## Functionalities to test : “A good test is a test that catches bugs”
 
-**Idea :** Avant d'implémenter le refactoring, nous avons écrit des tests mettant en évidence les bugs liés aux mouvements des pions, en se basant sur “_The Right BICEP principle_”.
+**Idea :** Avant d'implémenter le refactoring, nous avons écrit des tests mettant en évidence les bugs liés aux mouvements des pions (TDD), en se basant sur “_The Right BICEP principle_”.
 
 ### _Checking the right result (Right)_
 
-**Feature 1:** Nous allons vérifier qu'en avançant 1 ou 2 cases au premier mouvement d'un pion, on arrive sur la bonne case.
+**Feature 1:** 
 
-**Feature 2:** Nous allons vérifier qu'on n'avance que d'une case après le premier mouvement d'un pion.
+Nous allons vérifier que :
+1. Nos déplacements possible sont au nombre de 2 cases (droit devant) ✅  
+2. En avançant 1 ou 2 cases **au premier mouvement** d'un pion, on arrive sur la bonne case. ✅  
 
-**Feature 3:** Nous allons vérifier que si un pion peut capturer un pion adverse, alors il peut avancer en diagonal et le pion adverse est capturé (plus sur le plateau).
+Il est bien de tester (2.) car l'ajout du flag vérifiant si on est au premier déplacement ou non d'un pion a pu impacter le cas de déplacement initial (avancement d'une case).  
 
+**Feature 2:** Nous allons vérifier qu'on peut avancer d'une case après le premier mouvement d'un pion. ✅  
+
+**Feature 3:** Nous allons vérifier que si un pion peut capturer un pion adverse, alors il peut avancer en diagonal. ✅  
+
+**Feature 3:** Nous allons vérifier que si un pion peut capturer un pion adverse, alors le pion adverse est capturé (il n'est plus owner du square c'est le piont gagnant). ✅  
 
 ### _Checking boundary cases (B)_
 
-check extreme cases (e.g. null, 0, empty, bigger than the collection…)
+- Nous allons vérifier qu'un pion ne peut pas sortir de la grille. ✅  
 
-- Après chaque déplacement, l'attribut square ne doit pas être vide/null (au départ). 
+- Nous allons vérifier qu'un pion ne pas passer sur des cases ou il y a des pions (à l'exception d'un pion adverse en diagonal). ✅  
 
-**Feature 1:** Nous allons vérifier qu'on ne peut pas avancer de plus de 2 cases au premier mouvement. 
-
-**Feature 2:** Nous allons vérifier qu'on ne peut pas avancer de plus de 1 case après le premier mouvement.
 
 ### _Checking inverse conditions (I)_
 
-**Feature 3:** Nous allons vérifier que si un pion ne peut pas capturer un pion adverse, alors il peut pas avancer en diagonal et le pion n'est pas capturé (présent sur le plateau).
+**Feature 1:** Nous allons vérifier que si un pion n'est pas à son premier déplacement, alors il ne peut pas faire plus de 1 déplacement.  ✅   
+
+**Feature 2:** Nous allons vérifier que si un pion est à son premier déplacement, alors il ne peut pas faire plus de 2 déplacement. ✅    
+
+**Feature 3:** Nous allons vérifier qu'un pion ne peut pas avancer en diagonal s'il ne peut pas capturer de pion adverse. ✅  
+
 
 ### _check error conditions (E)_
+
+**Vérification des actions illégales :** 
+- Vérifier qu'un pion ne peut pas reculer (mouvement en arrière est interdit)
+
+- Vérifier que la capture "en passant" ne peut se produire que si le pion adverse a avancé de 2 cases lors de son dernier mouvement.
+
+- Vérifier qu'il est impossible d'utiliser la capture "en passant" si l'adversaire n'a pas déplacé son pion immédiatement avant.
 check complex cases (e.g. exceptions)
 
 
