@@ -21,6 +21,37 @@ MyPawnTest >> setUp [
 ]
 
 { #category : 'tests' }
+MyPawnTest >> testCannotExceedOneMoveIfAfterFirstMove [
+
+	| board whitePawn blackPawn targetWhiteSquare targetBlackSquare startWhiteSquare startBlackSquare|
+	
+	"Context"
+	board := MyChessGame freshGame board .
+													
+	whitePawn := (board at: 'e2') contents. 
+	blackPawn := (board at: 'h7') contents. 
+	
+	"Stimuli"
+		"White pawn"
+		
+		"first move :" board game move: whitePawn to: (whitePawn square up).
+		startWhiteSquare := whitePawn square.
+		targetWhiteSquare := whitePawn square up up.
+		"trying exceed one square :" board game move: whitePawn to: targetWhiteSquare.
+		
+		"Black pawn : first move"
+		"first move :" board game move: blackPawn to: (blackPawn square down).
+		startBlackSquare := blackPawn square.
+		targetBlackSquare := blackPawn square down down.
+		"trying exceed one square :" board game move: blackPawn to: targetBlackSquare.
+		
+				
+	"Check"
+	self assert: (whitePawn square ~= targetWhiteSquare and: [whitePawn square = startWhiteSquare]).
+	self assert: (blackPawn square ~= targetBlackSquare and: [blackPawn square = startBlackSquare]).
+]
+
+{ #category : 'tests' }
 MyPawnTest >> testCannotExceedPawnStraightAhead [
 
 	| board whitePawn blackPawn|
@@ -67,6 +98,68 @@ MyPawnTest >> testCannotExceedTheGrid [
 	"Check"
 	self assert: whitePawn targetSquares isEmpty.
 	self assert: blackPawn targetSquares isEmpty.	
+]
+
+{ #category : 'tests' }
+MyPawnTest >> testCannotExceedTwoMovesIfFirstMove [
+
+	| board whitePawn blackPawn targetWhiteSquare targetBlackSquare startWhiteSquare startBlackSquare|
+	
+	"Context"
+	board := MyChessGame freshGame board .
+													
+	whitePawn := (board at: 'e2') contents. 
+	blackPawn := (board at: 'h7') contents. 
+	
+	"Stimuli"
+		"White pawn"
+		
+		startWhiteSquare := whitePawn square.
+		targetWhiteSquare := whitePawn square up up up.
+		"trying exceed two squares :" 
+		board game move: whitePawn to: targetWhiteSquare.
+		
+		"Black pawn"
+		startBlackSquare := blackPawn square.
+		targetBlackSquare := blackPawn square down down down.
+		"trying exceed two squares :
+		" board game move: blackPawn to: targetBlackSquare.
+		
+				
+	"Check"
+	self assert: (whitePawn square ~= targetWhiteSquare and: [whitePawn square = startWhiteSquare]).
+	self assert: (blackPawn square ~= targetBlackSquare and: [blackPawn square = startBlackSquare]).
+]
+
+{ #category : 'tests' }
+MyPawnTest >> testCannotMoveInDiagonalIfCannotCapture [
+
+	| board whitePawn blackPawn targetWhiteSquare targetBlackSquare startWhiteSquare startBlackSquare|
+	
+	"Context"
+	board := MyChessGame freshGame board .
+													
+	whitePawn := (board at: 'e2') contents. 
+	blackPawn := (board at: 'd7') contents. 
+	
+	"Stimuli"
+		"White pawn"
+		
+		startWhiteSquare := whitePawn square.
+		targetWhiteSquare := whitePawn square up left.
+		"trying move in diagonal :" 
+		board game move: whitePawn to: targetWhiteSquare.
+		
+		"Black pawn"
+		startBlackSquare := blackPawn square.
+		targetBlackSquare := blackPawn square down right.
+		"trying move in diagonal :"
+		board game move: blackPawn to: targetBlackSquare.
+		
+				
+	"Check"
+	self assert: (whitePawn square ~= targetWhiteSquare and: [whitePawn square = startWhiteSquare]).
+	self assert: (blackPawn square ~= targetBlackSquare and: [blackPawn square = startBlackSquare]).
 ]
 
 { #category : 'tests' }
