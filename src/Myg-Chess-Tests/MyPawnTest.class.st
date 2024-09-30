@@ -132,7 +132,45 @@ MyPawnTest >> testCannotExceedTwoMovesIfFirstMove [
 ]
 
 { #category : 'tests' }
-MyPawnTest >> testCannotMoveInDiagonalIfCannotCapture [
+MyPawnTest >> testCannotMoveInDiagonalIfAllyInTargetSquare [
+
+	| board whitePawn blackPawn targetWhiteSquare targetBlackSquare startWhiteSquare startBlackSquare|
+	
+	"Context"
+	board := MyChessGame freshGame board .
+													
+	whitePawn := (board at: 'e2') contents. 
+	blackPawn := (board at: 'd7') contents. 
+	
+	"Stimuli"
+		"White pawn"
+		startWhiteSquare := whitePawn square.
+		targetWhiteSquare := whitePawn square up left.
+		
+		"move white ally on targetSquare"
+		board game move: ((board at: 'd2') contents) to: targetWhiteSquare.
+		
+		"trying move in diagonal :" 
+		board game move: whitePawn to: targetWhiteSquare.
+		
+		"Black pawn"
+		startBlackSquare := blackPawn square.
+		targetBlackSquare := blackPawn square down right.
+		
+		"move black ally on targetSquare"
+		board game move: ((board at: 'e7') contents) to: targetBlackSquare.
+		
+		"trying move in diagonal :"
+		board game move: blackPawn to: targetBlackSquare.
+		
+				
+	"Check"
+	self assert: (whitePawn square ~= targetWhiteSquare and: [whitePawn square = startWhiteSquare and: [targetWhiteSquare contents color = whitePawn color]]).
+	self assert: (blackPawn square ~= targetBlackSquare and: [blackPawn square = startBlackSquare and: [targetBlackSquare contents color = blackPawn color]]).
+]
+
+{ #category : 'tests' }
+MyPawnTest >> testCannotMoveInDiagonalIfEmptyTargetSquare [
 
 	| board whitePawn blackPawn targetWhiteSquare targetBlackSquare startWhiteSquare startBlackSquare|
 	
@@ -158,8 +196,8 @@ MyPawnTest >> testCannotMoveInDiagonalIfCannotCapture [
 		
 				
 	"Check"
-	self assert: (whitePawn square ~= targetWhiteSquare and: [whitePawn square = startWhiteSquare]).
-	self assert: (blackPawn square ~= targetBlackSquare and: [blackPawn square = startBlackSquare]).
+	self assert: (whitePawn square ~= targetWhiteSquare and: [whitePawn square = startWhiteSquare and: [targetWhiteSquare hasPiece not]]).
+	self assert: (blackPawn square ~= targetBlackSquare and: [blackPawn square = startBlackSquare and: [targetBlackSquare hasPiece not]]).
 ]
 
 { #category : 'tests' }
