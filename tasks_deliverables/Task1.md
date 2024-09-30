@@ -1,4 +1,4 @@
-# Task 1 Deliverables
+# Task 1 Deliverables : Manual testing and refactoring
 
 ## Introduction
 
@@ -61,6 +61,10 @@ Il est bien de tester (2.) car l'ajout du flag vérifiant si on est au premier d
 check complex cases (e.g. exceptions)
 
 
+## Summury : 
+
+### Look up on code coverage 
+###
 
 <!-- ---------- -->
 TODO : 

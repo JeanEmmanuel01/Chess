@@ -32,10 +32,26 @@ space pulse.
 space resizable: true.
 space show.
 ```
+## Installation de Mutalk :
+
+```smalltalk
+Deprecation activateTransformations: false.
+Metacello new
+  baseline: 'MuTalk';
+  repository: 'github://pharo-contributions/mutalk:v2.5.0/src';
+  load.
+Metacello new
+  baseline: 'AVLTesting';
+  repository: 'github://avl-univ-lille/practice';
+  load.
+```
+
 
 ### Task Deliverables :
 
 - Livrable 1 : 
   - documentation : [Task1.md](./tasks_deliverables/Task1.md)
   - Lien Git du livrable : TODO
+- Livrable 2 :
+  - documentation : [Task2.md](./tasks_deliverables/Task2.md)
 
