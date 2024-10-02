@@ -324,3 +324,30 @@ MyPawnTest >> testPossibleMovesIfNotFirstMove [
 		assertCollection: squares
 		includesAll: (#( e4 ) collect: [ :name | board at: name ])
 ]
+
+{ #category : 'tests' }
+MyPawnTest >> testRenderPieceOn [
+	| board whitePawn blackPawn whiteRender blackRender |
+	
+	board := MyChessGame freshGame board.
+	whitePawn := (board at: 'e2') contents. 
+	blackPawn := (board at: 'h7') contents.
+	
+	whiteRender := whitePawn renderPieceOn: (board at: 'e2').
+	blackRender := blackPawn renderPieceOn: (board at: 'h7').
+	
+	"White pawn on a white square must return 'P', black pawn on a white square 'O'"
+	self assert: (whitePawn isWhite and: [whitePawn square color isBlack not and: [whiteRender = 'P']]).
+	self assert: (blackPawn isWhite not and: [blackPawn square color isBlack not and: [blackRender = 'O']]).
+	
+	board game move: whitePawn to: (board at: 'e3').
+	board game move: blackPawn to: (board at: 'h6').
+
+	whiteRender := whitePawn renderPieceOn: (board at: 'e3').
+	blackRender := blackPawn renderPieceOn: (board at: 'h6').
+	
+	"A white pawn on a black square must return 'p', a black pawn on a black square 'o'"
+	self assert: (whitePawn isWhite and: [whitePawn square color isBlack and: [whiteRender = 'p']]).
+	self assert: (blackPawn isWhite not and: [blackPawn square color isBlack and: [blackRender = 'o']]).
+
+]

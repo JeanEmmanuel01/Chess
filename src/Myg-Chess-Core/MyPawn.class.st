@@ -11,19 +11,11 @@ MyPawn >> id [
 	^ 'P'
 ]
 
-{ #category : 'initialization' }
-MyPawn >> initialize [
-
-	super initialize.
-	
-	
-]
-
 { #category : 'accessing' }
 MyPawn >> isFirstStep [
     ^(self isWhite 
-        ifTrue: [ (square name findString: '2' ) > 0 ] 
-        ifFalse: [ (square name findString: '7' ) > 0 ]).
+        ifTrue: [ (square name findString: '2' ) = 2 ] 
+        ifFalse: [ (square name findString: '7' ) = 2 ]).
 
 ]
 
