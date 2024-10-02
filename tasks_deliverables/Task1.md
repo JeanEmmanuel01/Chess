@@ -11,7 +11,7 @@ L'objectif de ce kata est de réaliser les déplacements des pions (Pawns) du je
 1. Les pions peuvent avancer tout droit de 2 cases pour leur premier mouvement. 
 2. Les pions avance d'une case à la fois (à l'exception du premier mouvement).
 3. Les pions peuvent avancer d'une case en diagonale pour capturer une pièce ennemie.
-4. “En passant” : Si un pion adverse avance de 2 cases (pour son premier mouvement) et attérie à côté (sur la même ligne) qu'un de nos pions, notre pion peut le capturer en avançant en diagonale juste derrière lui.  
+4. Bonus : “En passant” : Si un pion adverse avance de 2 cases (pour son premier mouvement) et attérie à côté (sur la même ligne) qu'un de nos pions, notre pion peut le capturer en avançant en diagonale juste derrière lui.  
 
 
 ## Functionalities to test : “A good test is a test that catches bugs”
