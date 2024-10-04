@@ -222,27 +222,6 @@ MyPawnTest >> testDiagonalMoveIfCanCapture [
 ]
 
 { #category : 'tests' }
-MyPawnTest >> testDiagonalPossibleMoveIfCanCapture [
-
-	| board pawnWhite pawnBlack blackSquares whiteSquares |
-	"Context""Possible moves Tests""Check"
-	
-	board := MyChessGame freshGame board.
-	pawnWhite := (board at: 'd2') contents.
-	pawnBlack := (board at: 'e7') contents.
-	
-	"Stimuli"
-	self setDiagonalSituation: pawnWhite a: pawnBlack b: board.
-	whiteSquares := pawnWhite targetSquares.
-	blackSquares := pawnBlack targetSquares.
-	
-	self
-		assertCollection: whiteSquares , blackSquares
-		includesAll:
-		(#( #d5 #e5 #e4 #d4 ) collect: [ :name | board at: name ])
-]
-
-{ #category : 'tests' }
 MyPawnTest >> testFirstMoveOnFirstSquare [
 	| pawn board squareE3 |
 	
@@ -285,6 +264,47 @@ MyPawnTest >> testId [
 	self assert: MyPawn new id equals: 'P'.
 	
 
+	
+]
+
+{ #category : 'tests' }
+MyPawnTest >> testPossibleDiagonalMoveIfCanCapture [
+
+	| board pawnWhite pawnBlack blackSquares whiteSquares |
+	
+	"Context"
+	board := MyChessGame freshGame board.
+	pawnWhite := (board at: 'd2') contents.
+	pawnBlack := (board at: 'e7') contents.
+	
+	"Stimuli"
+	self setDiagonalSituation: pawnWhite a: pawnBlack b: board.
+	whiteSquares := pawnWhite targetSquares.
+	blackSquares := pawnBlack targetSquares.
+	
+	"Check"
+	self
+		assertCollection: whiteSquares , blackSquares
+		includesAll:
+		(#( #d5 #e5 #e4 #d4 ) collect: [ :name | board at: name ])
+]
+
+{ #category : 'tests' }
+MyPawnTest >> testPossibleDiagonalMoveReturnsArray [
+
+	| board pawnWhite pawnBlack blackSquares whiteSquares |
+	"Context"
+	board := MyChessGame freshGame board.
+	pawnWhite := (board at: 'd2') contents.
+	pawnBlack := (board at: 'e7') contents.
+	
+	"Stimuli"
+	self setDiagonalSituation: pawnWhite a: pawnBlack b: board.
+	whiteSquares := pawnWhite possibleDiagonalMove.
+	blackSquares := pawnBlack possibleDiagonalMove.
+	
+	self assert: whiteSquares class equals: Array.
+	self assert: blackSquares class equals: Array.
 	
 ]
 
