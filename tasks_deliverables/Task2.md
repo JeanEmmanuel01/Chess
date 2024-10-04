@@ -117,7 +117,38 @@ Donc elle joue le rôle d'un simple conteneur ici encore.
 
 
 
-**Bonus 30% of the grade:** Analyse equivalent mutants and implement at least one strategy to minimize them. Your implementation and scripts to use it should be available in the repository. Explain your analysis and implementation in the report.
+## Bonus 
+
+**wording** Analyse equivalent mutants and implement at least one strategy to minimize them. Your implementation and scripts to use it should be available in the repository. Explain your analysis and implementation in the report.  
+<br/>
+
+Nous allons implémtenté une stratégie afin de tuer les mutants équivalant énoncé plus haut.  
+Il s'agit là d'écrire un test pour la méthode `possibleDiagonalMove` qui vérifie le type de sa valeur de retour et qui s'assure qu'en sortie on a bien un Array et non une de ses sous-classes.
+
+```smalltalk
+testPossibleDiagonalMoveReturnsArray
+
+	| board pawnWhite pawnBlack blackSquares whiteSquares |
+	"Context"
+	board := MyChessGame freshGame board.
+	pawnWhite := (board at: 'd2') contents.
+	pawnBlack := (board at: 'e7') contents.
+	
+	"Stimuli"
+	self setDiagonalSituation: pawnWhite a: pawnBlack b: board.
+	whiteSquares := pawnWhite possibleDiagonalMove.
+	blackSquares := pawnBlack possibleDiagonalMove.
+	
+	self assert: whiteSquares class equals: Array.
+	self assert: blackSquares class equals: Array.
+	
+```
+
+**Mutation Score After implement strategy:** `100`  
+
+Nous avons réussis à éliminer les mutants équivalant en question par l'implémentation de ce test, nous avons obtenu un mutation score de 100% car les mutants équivalents restants étaient du même type comme nous l'avons vue précédemment. 
+
+
 
 
  
