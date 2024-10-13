@@ -21,19 +21,29 @@ Cette classe possède dans sa méthode `defineGrammar` les règles définissant 
 
 ```smalltalk
 defineGrammar
-  "The superclass defines how to generate numbers"
+  
 	super defineGrammar.
 	
-  "Definition of board configuration"
 	ntSeparator --> '/'.
-	ntWhitePiece --> ('R'|'N'|'B'|'Q'|'K').
-	ntBlackPiece --> ('r'|'n'|'b'|'q'|'k').
-	ntRow --> ($1-$8) | ($1 - $8),ntRow | ntWhitePieces,ntRow | ntBlackPieces,ntRow .
-	ntRows --> ntSeparator , ntRow .
-	ntWhitePieces --> ntWhitePiece | ntWhitePiece, ntWhitePieces .
-	ntBlackPieces --> ntBlackPiece | ntBlackPiece, ntBlackPieces .
+	ntTurn --> 'w'| 'b'.
+	ntWhitePiece --> 'R'|'N'|'B'|'Q'|'K'.
+	ntBlackPiece --> 'r'|'n'|'b'|'q'|'k'.
+	ntBlackOrWhitePiece --> ntBlackPiece | ntWhitePiece.
+	ntRockRule --> 'KQkq'.
+	ntMoreWhite  --> ntWhitePiece | ntBlackPiece | ntWhitePiece.
+	ntMoreBlack  --> ntWhitePiece | ntBlackPiece | ntBlackPiece.
 	
-	ntFen --> ntBlackPieces, ntRows , ntRows, ntRows, ntRows, ntRows, ntRows,ntSeparator,ntWhitePieces.
+	ntWhitePieces --> ntMoreWhite, ntMoreWhite, ntMoreWhite, ntMoreWhite, ntMoreWhite, ntMoreWhite,           ntMoreWhite, ntMoreWhite.
+	
+	ntBlackPieces --> ntMoreBlack, ntMoreBlack, ntMoreBlack, ntMoreBlack, ntMoreBlack, ntMoreBlack,           ntMoreBlack, ntMoreBlack.
+	
+	ntRow --> '8' | '7', ntBlackOrWhitePiece | ($1 - $5), ntBlackOrWhitePiece,($1 - $2) |                      ntBlackOrWhitePiece,'7' | ntWhitePieces | ntBlackPieces.
+
+	ntRows --> ntSeparator , ntRow .
+
+	ntFen --> ntBlackPieces, ntRows,ntRows,ntRows,ntRows,ntRows,ntRows,
+	ntSeparator,ntWhitePieces,' ',ntTurn,' ',ntRockRule,' ', '-', ' ', ($0 - $1),' ',($1 - $2) .
+	
 	
 	^ ntFen
 ```
@@ -128,9 +138,6 @@ TODO
 on a vue 3 types de mutations : enlever/ajouter/supprimer un caractère 
 
 
-
-
-
 ```
 |chessFenFuzzer corpusGoodChessFen corpus mutationFuzzer|
 
@@ -185,9 +192,8 @@ MyFENParser parse: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'.
 
 ```smalltalk
 |chessFenFuzzer r|
-
 chessFenFuzzer := PzGrammarFuzzer on: MyFenChessGrammar new.
-r := MyPzChessFenOracleRunner on: [ :e | MyFENParser parse: e ].
+r := MyPzChessFenOracleRunner on: [ :e | e ].
 chessFenFuzzer run: r times: 100.
 ```
 
@@ -206,11 +212,15 @@ En analysant sur  ... inputs :
 
 ### By Mutation Fuzzing
 
+**what kind of mutations did you use and how did you implement them?**
+
+- Default mutiation of ...
+- PzDeleteCharacterMutation
+
+| type of mutation | Pass | Expected Fail | Fail |
+|---------------|------|---------------|------|
+| Mut1   | 49 % | 29 %          | 22 % |
+| Mut2 | 0 %  | 0 %           | 100 %|
+| Mut3  | 0 %  | 0 %           | 100 %|
 
 
-TO think :
-
-
-*differential testing : si l'oracle valide alors, le parser du jeu d'echer devrait marcher*
-
-what kind of mutations did you use and how did you implement them?
