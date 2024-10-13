@@ -21,17 +21,6 @@ Metacello new
 	load.
 ```
 
-## Lancement du jeu d'échec :
-
-```smalltalk
-board := MyChessGame freshGame.
-board size: 800@600.
-space := BlSpace new.
-space root addChild: board.
-space pulse.
-space resizable: true.
-space show.
-```
 ## Installation de Mutalk :
 
 ```smalltalk
@@ -46,6 +35,25 @@ Metacello new
   load.
 ```
 
+## Installation de NeoJSON:
+```smalltalk
+Metacello new
+  baseline: 'NeoJSON';
+  repository: 'github://svenvc/NeoJSON:master/src';
+  load.
+```
+
+## Lancement du jeu d'échec :
+
+```smalltalk
+board := MyChessGame freshGame.
+board size: 800@600.
+space := BlSpace new.
+space root addChild: board.
+space pulse.
+space resizable: true.
+space show.
+```
 
 ### Task Deliverables :
 
@@ -54,4 +62,10 @@ Metacello new
   - Lien Git du livrable : TODO
 - Livrable 2 :
   - documentation : [Task2.md](./tasks_deliverables/Task2.md)
+  - Lien
+  - installation requise : `Mutalk`.
+- Livrable 3 : 
+  - documentation : [Task3.md](./tasks_deliverables/Task3.md)
+  - Lien Git du livrable : TODO
+  - installation requise : `Mutalk`, `NeoJSON`.
 
