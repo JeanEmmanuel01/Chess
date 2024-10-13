@@ -33,7 +33,6 @@ MyPawnTest >> testCannotExceedOneMoveIfAfterFirstMove [
 	
 	"Stimuli"
 		"White pawn"
-		
 		"first move :" board game move: whitePawn to: (whitePawn square up).
 		startWhiteSquare := whitePawn square.
 		targetWhiteSquare := whitePawn square up up.
