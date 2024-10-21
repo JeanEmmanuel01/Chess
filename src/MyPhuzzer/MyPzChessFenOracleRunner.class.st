@@ -9,11 +9,7 @@ Class {
 { #category : 'running' }
 MyPzChessFenOracleRunner >> basicRunOn: input [
 
-|result|
-
-result := (self checkChessFenString: (self createFENBody: input)).
-
-	^ self block value: result.
+	^ self block value: (MyFENParser parse:input). 
 ]
 
 { #category : 'running' }
@@ -25,7 +21,7 @@ MyPzChessFenOracleRunner >> checkChessFenString: input [
         client 
             url: 'http://127.0.0.1:8000/validate_fen/'; 
             entity: (ZnEntity 
-                        with: input 
+                        with: (self createFENBody: input) 
                         type: ZnMimeType applicationJson).
         client post.
 
@@ -47,16 +43,22 @@ MyPzChessFenOracleRunner >> createFENBody: input [
 
 { #category : 'running' }
 MyPzChessFenOracleRunner >> value: input [
-	| result |
+	| result oracleResponse|
+	oracleResponse := self checkChessFenString: input.
 	
-	[ result := self basicRunOn: input ]
+	[result := self basicRunOn: input]
 		on: Error
 		do: [ :err | 
 			(expectedException notNil and: [ expectedException handles: err ])
-					ifTrue: [ ^ self expectedFailureWith: {input . err freeze} ].
-			^ self failureWith: {input . err freeze} ].
+					ifTrue: [ 
+						oracleResponse 
+							ifTrue: [ ^ self failureWith: {input . err freeze . ' Oracle had validated Fen'} ] 
+							ifFalse: [ ^ self expectedFailureWith: {input . err freeze . ' Oracle had not validated Fen too'} ]  ].
+			^ oracleResponse 
+					ifTrue: [ self failureWith: {input . err freeze . ' Oracle had validated Fen'} ] 
+					ifFalse: [ self failureWith: {input . err freeze . ' Oracle had not validated Fen too'} ]  ].
 	
-	^ result 
-				ifTrue: [ ^ self successWith: {input . 'Oracle validated' . 'isValid' . result} ] 
+	^ (oracleResponse) 
+				ifTrue: [ ^ self successWith: {input . 'Oracle validated'} ] 
 				ifFalse: [ self failureWith: {input . 'Oracle invalidated'} ] .
 ]
