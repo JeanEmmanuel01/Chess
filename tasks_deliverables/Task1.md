@@ -52,43 +52,15 @@ Il est bien de tester (2.) car l'ajout du flag vérifiant si on est au premier d
 
 ### _check error conditions (E)_
 
+
+
 **Vérification des actions illégales :** 
 - Vérifier qu'un pion ne peut pas reculer (mouvement en arrière est interdit)
 
 - Vérifier que la capture "en passant" ne peut se produire que si le pion adverse a avancé de 2 cases lors de son dernier mouvement.
 
 - Vérifier qu'il est impossible d'utiliser la capture "en passant" si l'adversaire n'a pas déplacé son pion immédiatement avant.
-check complex cases (e.g. exceptions)
 
 
-## Summury : 
+**NB:** Malheureusement, j'ai pas eu le temps d'implémenter cette partie. 
 
-### Look up on code coverage 
-###
-
-<!-- ---------- -->
-TODO : 
-(what are the functionalities to test for the refactoring ?)
-(what tests did you write and why)
-(what test you did not write and why)
-<!-- ---------- -->
-
-### How To : 
-
-- Lancer la couverture de code
-- Lancer les tests 
-
-# Evaluation : TODO
-
-Task 1 will be evaluated by the quality and thoroughness of your tests.
-
-We will evaluate : 70% of the grade
-- code coverage
-- tests for positive cases
-- negative cases
-- border cases 
-- default values. 
-
-30% of the grade: 
-
-In addition of writing your tests, apply the kata refactoring. This shows that your tests do actually work.

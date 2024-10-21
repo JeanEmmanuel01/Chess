@@ -6,7 +6,7 @@ L'objectif de cette tâche est d'analyser des tests de mutation dans notre proje
 
 # Mutation Analysis 
 
-J'ai choisi d'analyser la classe `MyPawn` au vue du _Kata n°1_, car j'ai eu à effectuer beaucoup de tests dans cette classe et je voulais vérifier la fiabilité de mes tests. De plus pour des questions de Runtime, c'est une bonne pratique de seulement mutés des classes couvertes par des tests.
+J'ai choisi d'analyser la classe `MyPawn` au vue du _Kata n°1_, car j'ai eu à effectuer beaucoup de tests dans cette classe et je voulais vérifier la fiabilité de mes tests. De plus pour des questions de Runtime, c'est une bonne pratique de seulement muter des classes couvertes par des tests.
 
 ### Analysis Commands
 
