@@ -58,12 +58,14 @@ space show.
 ### Task Deliverables :
 
 - Livrable 1 : 
-  - documentation : [Task1.md](./tasks_deliverables/Task1.md)
-  - Lien Git du livrable : TODO
+  - Documentation : [Task1.md](./tasks_deliverables/Task1.md)
+  - Lien Git du livrable (Tag) : 
+    - <TAG> : Tag contenant les tests à jour du Kata1 ainsi que son rapport, mais dans le rapport existait en fin de page une section de brouillon qui a été supprimé dans les versions suivantes.
+  
 - Livrable 2 :
-  - documentation : [Task2.md](./tasks_deliverables/Task2.md)
-  - Lien
-  - installation requise : `Mutalk`.
+  - Installation requise : `Mutalk`.
+  - Documentation : [Task2.md](./tasks_deliverables/Task2.md)
+  - Lien Git du livrable (Tag) : 
 - Livrable 3 : 
   - documentation : [Task3.md](./tasks_deliverables/Task3.md)
   - Lien Git du livrable : TODO
