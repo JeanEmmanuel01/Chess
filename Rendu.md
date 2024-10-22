@@ -60,14 +60,14 @@ space show.
 - Livrable 1 : 
   - Documentation : [Task1.md](./tasks_deliverables/Task1.md)
   - Lien Git du livrable (Tag) : 
-    - <TAG> : Tag contenant les tests à jour du Kata1 ainsi que son rapport, mais dans le rapport existait en fin de page une section de brouillon qui a été supprimé dans les versions suivantes.
+    - [Task1](https://github.com/JeanEmmanuel01/Chess/tree/Task1) : Tag contenant les tests à jour du Kata1 ainsi que   son rapport, mais dans le rapport existait en fin de page une section de brouillon qui a été supprimé dans les versions suivantes.
   
 - Livrable 2 :
   - Installation requise : `Mutalk`.
   - Documentation : [Task2.md](./tasks_deliverables/Task2.md)
-  - Lien Git du livrable (Tag) : 
+  - Lien Git du livrable (Tag) : la branche [main](https://github.com/JeanEmmanuel01/Chess/tree/main) est suffisante
 - Livrable 3 : 
   - documentation : [Task3.md](./tasks_deliverables/Task3.md)
-  - Lien Git du livrable : TODO
+  - Lien Git du livrable : la branche [main](https://github.com/JeanEmmanuel01/Chess/tree/main) est suffisante
   - installation requise : `Mutalk`, `NeoJSON`.
 
